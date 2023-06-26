@@ -1,0 +1,24 @@
+web3 execTransaction
+// Set up web3 and contract instance
+const Web3 = require('web3');
+const web3 = new Web3('https://mainnet.infura.io/v3/YOUR-PROJECT-ID');
+const contractAddress = '0x1234567890123456789012345678901234567890';
+const contractABI = [/* ABI goes here */];
+const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+// Set up transaction parameters
+const to = '0x0987654321098765432109876543210987654321';
+const value = web3.utils.toWei('1', 'ether');
+const data = contract.methods.myMethod().encodeABI();
+const operation = 0;
+const safeTxGas = 100000;
+const baseGas = 50000;
+const gasPrice = web3.utils.toWei('10', 'gwei');
+const gasToken = '0x0000000000000000000000000000000000000000';
+const refundReceiver = '0x1234567890123456789012345678901234567890';
+const signatures = '0x1234567890123456789012345678901234567890123456789012345678901234';
+
+// Call the execTransaction function
+contract.methods.execTransaction(to, value, data, operation, safeTxGas, baseGas, gasPrice, gasToken, refundReceiver, signatures)
+  .send({from: '0x0123456789012345678901234567890123456789'})
+  .then(console.log);
